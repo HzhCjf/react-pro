@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import { CloseOutlined } from "@ant-design/icons";
 import { Dropdown, Menu } from "antd";
 
@@ -83,7 +83,7 @@ function Tab({
           {tab.title}
         </Link>
         {tab.closable && (isHover || active) && (
-          <CloseOutlined className="tab-close" onClick={() => onClose(index)} rev={undefined} />
+          <CloseOutlined className="tab-close" onClick={() => onClose(index)}/>
         )}
       </div>
     </Dropdown>

@@ -1,5 +1,5 @@
 import type { ReactElement } from "react";
-import type { RouteObject } from "react-router-dom";
+import type { RouteObject } from 'react-router-dom';
 
 export interface XMeta {
   icon?: React.ReactNode;

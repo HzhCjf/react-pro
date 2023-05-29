@@ -1,6 +1,6 @@
 // src/routes/index.tsx
 import React, { lazy, Suspense, FC } from "react";
-import { useRoutes, Navigate } from "react-router-dom";
+import { useRoutes, Navigate } from 'react-router-dom';
 import { HomeOutlined,HeartOutlined} from "@ant-design/icons";
 import type { XRoutes } from "./types";
 
@@ -50,7 +50,7 @@ const routes: XRoutes = [
       {
         path: "/syt/dashboard",
         meta: {
-          icon: <HomeOutlined rev={undefined} />,
+          icon: <HomeOutlined/>,
           title: <Translation>route:dashboard</Translation>,
         },
         element: load(Dashboard),
@@ -58,7 +58,7 @@ const routes: XRoutes = [
       {
         path: "/syt/hospital",
         meta: {
-          icon: <HeartOutlined rev={undefined} />,
+          icon: <HeartOutlined/>,
           title: '医院管理',
         },
         element: load(Hospital),
