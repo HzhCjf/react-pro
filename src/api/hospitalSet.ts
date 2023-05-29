@@ -1,5 +1,4 @@
 import {requestHos} from '@/utils/http'
-import { type } from 'os'
 
 
 // 1.请求分页列表函数接收的参数类型
