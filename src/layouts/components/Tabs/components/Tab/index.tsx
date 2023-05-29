@@ -83,7 +83,7 @@ function Tab({
           {tab.title}
         </Link>
         {tab.closable && (isHover || active) && (
-          <CloseOutlined className="tab-close" onClick={() => onClose(index)} />
+          <CloseOutlined className="tab-close" onClick={() => onClose(index)} rev={undefined} />
         )}
       </div>
     </Dropdown>

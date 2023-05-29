@@ -40,7 +40,7 @@ request.interceptors.response.use(
     } else {
       // 说明功能失败，没有数据，返回失败的原因
       message.error(response.data.message);
-      return Promise.reject(response.data.message); // 外面触发失败的流程
+      return Promise.reject(response.data); // 外面触发失败的流程
     }
   },
   (error) => {
