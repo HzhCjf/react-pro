@@ -1,3 +1,3 @@
 import request from "./request";
-
-export { request };
+import requestHos from './requestHos'
+export { request ,requestHos };
