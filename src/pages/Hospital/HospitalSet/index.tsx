@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form, Input, Table, message } from "antd";
+import { Button, Form, Input, Table, Tooltip, message } from "antd";
 import {
   SearchOutlined,
   EditOutlined,
   DeleteOutlined,
 } from "@ant-design/icons";
-import { reqHospitalListInfo, typeHosList, typeReqHosInfoParams } from "@/api/hospitalSet";
-import Search from "antd/es/transfer/search";
+import { reqHospitalListInfo, typeHosList, typeReqHosInfoParams,typeHosListItem } from "@/api/hospitalSet";
 import { typeFormSearchData } from "./tpyes";
 import { useNavigate } from "react-router-dom";
 
@@ -85,6 +84,13 @@ export default function HospitalSet() {
     setRequestParams({...requestParams,page:1,hosname:'',hoscode:''})
   }
 
+  // 方法4:修改医院按钮的世界回调函数
+  const updateHos = (id:number)=>{
+    return ()=>{
+      navigate(`/syt/hospital/updateHospital/${id}`)
+    }
+  }
+
   //表格的列的设置
   const columns = [
     {
@@ -102,9 +108,14 @@ export default function HospitalSet() {
       dataIndex: "hoscode",
     },
     {
+      title: "id",
+      dataIndex: "id",
+    },
+    {
       title: "创建时间",
       dataIndex: "createTime",
-    },{
+    },
+    {
       title: "更新时间",
       dataIndex: "updateTime",
     },
@@ -126,11 +137,15 @@ export default function HospitalSet() {
     },
     {
       title: "操作",
-      render() {
+      render(row:typeHosListItem) {
         return (
           <div>
-            <Button icon={<EditOutlined />} type="primary"></Button>
-            <Button icon={<DeleteOutlined />} type="primary" danger></Button>
+            <Tooltip>
+              <Button icon={<EditOutlined />} type="primary" style={{marginRight:'20px'}} onClick={updateHos(row.id)}></Button>
+            </Tooltip>
+            <Tooltip>
+              <Button icon={<DeleteOutlined />} type="primary" danger></Button>
+            </Tooltip>
           </div>
         );
       },
