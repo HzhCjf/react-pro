@@ -1,59 +1,102 @@
 import { requestHos } from "@/utils/http";
 
-// 1.请求分页列表函数接收的参数类型
-export interface typeReqHosInfoParams{
-    page:number,
-    limit:number,
-    hosname:string,
-    hoscode:string
+//1. 请求分页列表函数 接收的参数类型
+export interface typeReqHosInfoParams {
+  page: number;
+  limit: number;
+  hosname: string;
+  hoscode: string;
 }
 
-// 2.医院列表的每一项的类型
-export interface typeHosListItem{
-    id:number,
-    createTime:string,
-    updateTime:string,
-    isDeleted:number,
-    param:object,
-    hosname:string,
-    hoscode:string,
-    apiUrl:string,
-    signKey:string,
-    contactsName:string,
-    contactsPhone:string,
-    status:number
+//2. 医院列表的每一项的类型
+export interface typeHosListItem {
+  id: number;
+  createTime: string;
+  updateTime: string;
+  isDeleted: number;
+  param: object;
+  hosname: string;
+  hoscode: string;
+  apiUrl: string;
+  signKey: string;
+  contactsName: string;
+  contactsPhone: string;
+  status: number;
 }
 
-// 3.医院列表的类型
-export type typeHosList = typeHosListItem[]
+//3. 医院列表的类型
+export type typeHosList = typeHosListItem[];
 
-export interface typeHosListInfo{
-    // 数据列表
-    records:typeHosList,
-    // 数据总条数
-    total:number,
-    // 当前页条数
-    size:number,
-    // 当前页
-    current:number,
-    orders:any[],
-    hitCount:boolean,
-    searchCount:boolean,
-    // 总页数
-    pages:number
+//4
+export interface typeHosListInfo {
+  //数据列表
+  records: typeHosList;
+  //数据总条数
+  total: number;
+  //当前页条数
+  size: number;
+  //当前页
+  current: number;
+  orders: any[];
+  hitCount: boolean;
+  searchCount: boolean;
+  //总页数
+  pages: number;
 }
 
-// 1.发送医院列表的分页列表请求
+//5. 新增医院参数类型
+export interface typeAddHosParams {
+  apiUrl: string;
+  contactsName: string;
+  contactsPhone: string;
+  hoscode: string;
+  hosname: string;
+  id?: number;
+}
+
+//1. 发送医院列表的分页列表请求
 export const reqHospitalListInfo = ({
-    page=1,
-    limit=3,
-    hosname='',
-    hoscode=''
-}:typeReqHosInfoParams)=>{
-    return requestHos.get<any,typeHosListInfo>(`/admin/hosp/hospitalSet/${page}/${limit}`,{
-        params:{
-            hosname,
-            hoscode
-        }
-    })
-}
+  page = 1,
+  limit = 3,
+  hosname = "",
+  hoscode = "",
+}: typeReqHosInfoParams) => {
+  return requestHos.get<any, typeHosListInfo>(
+    `/admin/hosp/hospitalSet/${page}/${limit}`,
+    {
+      params: {
+        hosname,
+        hoscode,
+      },
+    }
+  );
+};
+
+//2. 新增医院请求
+export const reqAddHospital = (HosDetail: typeAddHosParams) => {
+  return requestHos.post<any, null>(`/admin/hosp/hospitalSet/save`, HosDetail);
+};
+
+//3. 根据id获取当前医院的详细数据
+export const reqHosDetailById = (id: number) => {
+  return requestHos.get<any, typeHosListItem>(
+    `/admin/hosp/hospitalSet/get/${id}`
+  );
+};
+
+//4. 修改医院的请求
+export const reqUpdateHos = (hosDetail: typeAddHosParams) => {
+  return requestHos.put<any, null>(`/admin/hosp/hospitalSet/update`, hosDetail);
+};
+
+//5. 根据id删除某个医院的请求
+export const reqDeleteSingleHos = (id: number) => {
+  return requestHos.delete<any, null>(`/admin/hosp/hospitalSet/remove/${id}`);
+};
+
+//6. 批量删除医院
+export const reqBatchDeleteHos = (idList: React.Key[]) => {
+  return requestHos.delete(`/admin/hosp/hospitalSet/batchRemove`, {
+    data: idList,
+  });
+};
