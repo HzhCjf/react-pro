@@ -6,8 +6,13 @@ import {
   DeleteOutlined,
 } from "@ant-design/icons";
 import { reqHospitalListInfo, typeHosList, typeReqHosInfoParams } from "@/api/hospitalSet";
+import Search from "antd/es/transfer/search";
+import { typeFormSearchData } from "./tpyes";
 
 export default function HospitalSet() {
+  // 获取form实例
+  const [form ]= Form.useForm()
+
   // 数据1：请求数据列表参数数据
   const [requestParams,setRequestParams] = useState<typeReqHosInfoParams>({
     page:1,
@@ -55,6 +60,17 @@ export default function HospitalSet() {
   const pageChange = (page:number,limit:number) =>{
     // 拿到参数的新页码和新的pageSize
     setRequestParams({...requestParams,page,limit})
+  }
+
+  // 方法2:表单查询的回调函数
+  const searchFinsh = (value:typeFormSearchData)=>{
+    // onFinish事件函数默认接收一个参数,就是表单收集的值
+    console.log(value);
+    //可以通过useForm Hook获取form表单的实例,通过实例的getFieldsValue方法获取form的收集的数据
+    // console.log(form.getFieldsValue());
+
+    //改变保存请求参数的 状态，从而重新发送请求
+    setRequestParams({...requestParams,...value})
   }
 
   //表格的列的设置
@@ -112,15 +128,16 @@ export default function HospitalSet() {
 
   return (
     <div>
-      <Form layout="inline">
-        <Form.Item>
+      {/*                    表单实例       获取表单收集的值 */}
+      <Form layout="inline" form={form} onFinish={searchFinsh} >
+        <Form.Item name={'hosname'}>
           <Input placeholder="医院名称" />
         </Form.Item>
-        <Form.Item>
+        <Form.Item name={'hoscode'}>
           <Input placeholder="医院编号" />
         </Form.Item>
         <Form.Item>
-          <Button type="primary" icon={<SearchOutlined />}>
+          <Button type="primary" icon={<SearchOutlined />} htmlType="submit">
             查询
           </Button>
         </Form.Item>
@@ -144,7 +161,7 @@ export default function HospitalSet() {
         rowKey={(row) => {
           return row.id;
         }}
-        scroll={{ x: 1 }}
+        scroll={{ x: 3000 }}
         pagination={{
           // 当前页
           current:requestParams.page,
