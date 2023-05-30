@@ -8,6 +8,8 @@ import { selectLang } from "@/app/slice";
 
 import { RenderRoutes } from "./routes";
 
+import style from "./xxx.module.less"
+
 function App() {
   const lang = useAppSelector(selectLang);
 

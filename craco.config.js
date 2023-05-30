@@ -38,7 +38,6 @@ module.exports = {
           // 路径重写
           "^/dev-api": "",
         },
-        
       },
       "/hospital": {
         // 需要转发的请求前缀
@@ -48,7 +47,6 @@ module.exports = {
           // 路径重写
           "^/hospital": "",
         },
-        
       },
     },
   },

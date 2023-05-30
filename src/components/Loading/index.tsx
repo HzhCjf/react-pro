@@ -11,10 +11,10 @@ function Loading() {
 
   useEffect(() => {
     NProgress.done();
-    return ()=>{
+    return () => {
       NProgress.done();
-    }
-  }, []);
+    };
+  });
 
   return <></>;
 }
