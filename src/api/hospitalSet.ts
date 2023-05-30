@@ -89,3 +89,15 @@ export const reqHosDetailById = (id:number)=>{
 export const reqUpdateHos = (hosDetail:typeAddHosParams)=>{
   return requestHos.put<any,null>(`/admin/hosp/hospitalSet/update`,hosDetail)
 }
+
+// 5.根据id删除某个医院的请求
+export const reqDeleteSingleHos = (id:number)=>{
+  return requestHos.delete<any,null>(`/admin/hosp/hospitalSet/remove/${id}`)
+}
+
+// 6.批量删除医院
+export const reqBatchDeleteHos = (idList:React.Key[])=>{
+  return requestHos.delete(`/admin/hosp/hospitalSet/batchRemove`,{
+    data:idList
+  })
+}
