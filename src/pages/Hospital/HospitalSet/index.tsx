@@ -8,10 +8,14 @@ import {
 import { reqHospitalListInfo, typeHosList, typeReqHosInfoParams } from "@/api/hospitalSet";
 import Search from "antd/es/transfer/search";
 import { typeFormSearchData } from "./tpyes";
+import { useNavigate } from "react-router-dom";
 
 export default function HospitalSet() {
   // 获取form实例
   const [form ]= Form.useForm()
+
+  // 获取编程式路由导航方法
+  const navigate = useNavigate()
 
   // 数据1：请求数据列表参数数据
   const [requestParams,setRequestParams] = useState<typeReqHosInfoParams>({
@@ -69,8 +73,16 @@ export default function HospitalSet() {
     //可以通过useForm Hook获取form表单的实例,通过实例的getFieldsValue方法获取form的收集的数据
     // console.log(form.getFieldsValue());
 
-    //改变保存请求参数的 状态，从而重新发送请求
-    setRequestParams({...requestParams,...value})
+    //改变保存请求参数的 状态，从而重新发送请求,需要把page重新设置为1,否则可能会查询不到数据
+    setRequestParams({...requestParams,...value,page:1})
+  }
+
+  // 方法3:清空form
+  const resetForm = ()=>{
+    // 清空表单
+    form.resetFields()
+    //改变保存请求参数的 状态，从而重新发送请求(需要把page重新设置为1,否则可能会查询不到数据)
+    setRequestParams({...requestParams,page:1,hosname:'',hoscode:''})
   }
 
   //表格的列的设置
@@ -142,11 +154,11 @@ export default function HospitalSet() {
           </Button>
         </Form.Item>
         <Form.Item>
-          <Button>清空</Button>
+          <Button onClick={resetForm}>清空</Button>
         </Form.Item>
       </Form>
       <div style={{ margin: "20px 0" }}>
-        <Button type="primary" style={{ marginRight: "20px" }}>
+        <Button type="primary" style={{ marginRight: "20px" }} onClick={()=> navigate('/syt/hospital/AddHospital')}>
           添加
         </Button>
         <Button type="primary" danger>
