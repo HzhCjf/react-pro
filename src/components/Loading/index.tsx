@@ -11,6 +11,9 @@ function Loading() {
 
   useEffect(() => {
     NProgress.done();
+    return ()=>{
+      NProgress.done();
+    }
   }, []);
 
   return <></>;
