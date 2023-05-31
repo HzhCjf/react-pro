@@ -32,6 +32,7 @@ export default function HospitalList() {
   const [provinceList, setProvinceList] = useState<typeProvinceList>([]);
   //数据6:市列表
   const [cityList, setCityList] = useState<typeProvinceList>([]);
+  
   //数据7:区县列表
   const [districtList, setDistrictList] = useState<typeProvinceList>([]);
   //数据8:医院类型列表

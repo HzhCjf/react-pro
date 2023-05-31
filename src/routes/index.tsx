@@ -2,6 +2,7 @@
 import React, { lazy, Suspense, FC } from "react";
 import { useRoutes, Navigate } from "react-router-dom";
 import { HomeOutlined, SnippetsOutlined } from "@ant-design/icons";
+import { HomeOutlined, SnippetsOutlined } from "@ant-design/icons";
 import type { XRoutes } from "./types";
 
 import {

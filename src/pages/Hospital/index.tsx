@@ -8,3 +8,11 @@ export default function Hospital() {
     </Card>
   )
 }
+
+export default function Hospital(){
+    return(
+        <Card>
+            <Outlet></Outlet>
+        </Card>
+    )
+}
