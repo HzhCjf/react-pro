@@ -1,7 +1,7 @@
 // src/routes/index.tsx
 import React, { lazy, Suspense, FC } from "react";
-import { useRoutes, Navigate } from 'react-router-dom';
-import { HomeOutlined,HeartOutlined} from "@ant-design/icons";
+import { useRoutes, Navigate } from "react-router-dom";
+import { HomeOutlined, SnippetsOutlined } from "@ant-design/icons";
 import type { XRoutes } from "./types";
 
 import {
@@ -16,10 +16,13 @@ import Translation from "@comps/Translation";
 const Login = lazy(() => import("@pages/login"));
 const Dashboard = lazy(() => import("@pages/dashboard"));
 const NotFound = lazy(() => import("@pages/404"));
-const Hospital = lazy(()=> import('@pages/Hospital'))
-const HospitalSet = lazy(()=> import('@pages/Hospital/HospitalSet'))
-const HospitalList = lazy(()=> import('@pages/Hospital/HospitalList'))
-const AddOrUptateHospital = lazy(()=> import('@pages/Hospital/AddOrUptateHospital'))
+const Hospital = lazy(() => import("@pages/Hospital"));
+const HospitalSet = lazy(() => import("@pages/Hospital/HospitalSet"));
+const HospitalList = lazy(() => import("@pages/Hospital/HospitalList"));
+const AddOrUpdateHospital = lazy(
+  () => import("@pages/Hospital/AddOrUpdateHospital")
+);
+const HospitalDetail = lazy(() => import("@pages/Hospital/HospitalDetail"));
 
 const load = (Comp: FC) => {
   return (
@@ -51,7 +54,7 @@ const routes: XRoutes = [
       {
         path: "/syt/dashboard",
         meta: {
-          icon: <HomeOutlined/>,
+          icon: <HomeOutlined />,
           title: <Translation>route:dashboard</Translation>,
         },
         element: load(Dashboard),
@@ -59,43 +62,51 @@ const routes: XRoutes = [
       {
         path: "/syt/hospital",
         meta: {
-          icon: <HeartOutlined/>,
-          title: '医院管理',
+          icon: <SnippetsOutlined />,
+          title: "医院管理",
         },
         element: load(Hospital),
-        children:[
+        children: [
           {
             path: "/syt/hospital/hospitalSet",
-            element:load(HospitalSet),
-            meta:{
-              title:'医院设置',
+            element: load(HospitalSet),
+            meta: {
+              title: "医院设置",
             },
           },
           {
             path: "/syt/hospital/hospitalList",
-            element:load(HospitalList),
-            meta:{
-              title:'医院列表',
+            element: load(HospitalList),
+            meta: {
+              title: "医院列表",
             },
           },
           {
-            path: "/syt/hospital/AddHospital",
-            element:load(AddOrUptateHospital),
-            meta:{
-              title:'新增医院',
+            path: "/syt/hospital/addHospital",
+            element: load(AddOrUpdateHospital),
+            meta: {
+              title: "新增医院",
             },
-            hidden:true
+            hidden: true,
           },
           {
             path: "/syt/hospital/updateHospital/:id",
-            element:load(AddOrUptateHospital),
-            meta:{
-              title:'修改医院',
+            element: load(AddOrUpdateHospital),
+            meta: {
+              title: "修改医院",
             },
-            hidden:true
-          }
-        ]
-      }
+            hidden: true,
+          },
+          {
+            path: "/syt/hospital/hospitalDetail/:id",
+            element: load(HospitalDetail),
+            meta: {
+              title: "医院详情",
+            },
+            hidden: true,
+          },
+        ],
+      },
     ],
   },
 
