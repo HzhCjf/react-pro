@@ -11,7 +11,6 @@ import {
   typeReqHosInfoParams,
   typeHosListItem,
   reqDeleteSingleHos,
-  reqAddHospital,
   reqBatchDeleteHos
 } from "@/api/hospitalSet";
 import { typeFormSearchData } from "./tpyes";
@@ -114,7 +113,7 @@ export default function HospitalSet() {
         // 触发重新渲染
         setRequestParams({ ...requestParams })
       } catch (e: any) {
-        message.error('删除失败' + e.message)
+        message.error('删除失败')
       }
     }
   }

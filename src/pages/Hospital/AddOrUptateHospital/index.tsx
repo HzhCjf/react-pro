@@ -24,7 +24,7 @@ export default function AddOrUptateHospital() {
       form.setFieldsValue(result)
     }
     getHosDetailById()
-  })
+  },[])
 
   // 方法1：添加医院,收集表单数据
   const addOrUpdateHos = async (hosDetail: typeAddHosParams) => {
