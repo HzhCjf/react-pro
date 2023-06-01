@@ -202,7 +202,7 @@ export default function HospitalList() {
   return (
     <div>
       <Form layout='inline' form={form} onFinish={queryHospital}>
-        <Form.Item style={{ width: '200px', marginBottom: '20px' }} name='provinceCode'>
+        <Form.Item style={{ width: '200px', marginBottom: '20px' }} name='provinceCode' className='item'>
           <Select placeholder='请选择省' onChange={provinceChange}>
             {provinceList.map((province) => {
               return (
