@@ -160,7 +160,7 @@ export interface typeScheduleDetailItem {
 }
 
 // 科室排班详情列表类型
-export type typeScheduleDetailList = typeBookingScheduleItem[]
+export type typeScheduleDetailList = typeScheduleDetailItem[]
 
 //1. 请求医院列表
 export const reqHospitalListInfo = (

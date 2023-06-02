@@ -116,8 +116,8 @@ export default function HospitalSchedule() {
 
     return (
         <div>
-            <Row gutter={20}>
-                <Col span={4} style={{ height: '400px', border: '1px solid #333', overflow: "auto" }}>
+            <Row gutter={20} >
+                <Col span={4} style={{ height: '400px', border: '1px solid #333', overflow: "auto" }} >
                     <Tree treeData={hosSchedule as any} fieldNames={{ key: 'depcode', title: 'depname' }} defaultExpandedKeys={[hosSchedule[0]?.depcode]} onSelect={ScheduleDate}></Tree>
                 </Col>
                 <Col span={20}>
@@ -125,9 +125,9 @@ export default function HospitalSchedule() {
                         bookingScheduleList.length > 0 ?
                             <div>
                                 <div>
-                                    {bookingScheduleList.map((item, key) => {
+                                    {bookingScheduleList.map((item) => {
                                         return (
-                                            <Tag onClick={ScheduleDetail(item.workDate)}>
+                                            <Tag onClick={ScheduleDetail(item.workDate)} >
                                                 <p>{item.workDate} {item.dayOfWeek}</p>
                                                 <p>{item.availableNumber}/{item.reservedNumber}</p>
                                             </Tag>
@@ -145,7 +145,7 @@ export default function HospitalSchedule() {
                                     onChange={pageChange}
                                 ></Pagination>
 
-                                <Table columns={columns} dataSource={scheduleDetail}></Table>
+                                <Table columns={columns} dataSource={scheduleDetail} rowKey={(row) => row.id}></Table>
                             </div>:'暂无数据'
                     }
 
@@ -153,7 +153,7 @@ export default function HospitalSchedule() {
             </Row>
             <Button onClick={() => {
                 navigate(`/syt/hospital/hospitalList`)
-            }}>返回</Button>
+            }} style={{marginTop:'20px'}}>返回</Button>
         </div>
     )
 }

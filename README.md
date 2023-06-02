@@ -127,3 +127,99 @@ http://139.198.34.216:8202/swagger-ui.html#/
 - 在HospitalList里面使用useNavigate方法使查看按钮可以进行跳转到/syt/hospital/hospitalDetail/${row.id},row.id获取到这个数据体,然后进行跳转获取到这个数据的具体内容
 
 
+## 医院详情-数据请求及展示1
+- 封装医院详情api
+- 医院详情的接口:/admin/hosp/hospital/show/${id}
+- 封装医院详情中预约规则类型typeHosDetailBooking 
+- 封装医院详情返回值的类型:接口测试值:638b5b884247ee011ace845d
+- 然后封装api请求reqHosDetail,requsetHos
+- 打开HospitalDetail
+- 数据1:医院详情,类型可以null,但是在组件里面替换内容的时候要断言类型,并且数据还在后面,如数据.hospital.内容名
+- datalogo:{hosDetail && (
+            <img
+              width="100"
+              src={`data:image/*;base64,${
+                (hosDetail as typeHosDetail)?.hospital.logoData
+              }`}
+              alt=""
+            />
+          )}
+- 副作用1:请求医院详情数据,函数名自定,id可以断言为string,然后用数据方法,最后调用函数
+
+## 医院排班-路由搭建
+- 在Hospital文件夹里面新建文件夹HospitalSchedule文件夹,然后新建文件index.tsx
+- rfc
+- 编程式导航
+- 创建返回到医院列表的按钮
+- 到routes/index里面把HospitalSchedule进行懒加载,然后创建路由
+
+
+## 医院排班-栅格布局
+- 打开HospitalSchedule
+- 创建栅格布局,使用antd里面的Row,gutter为两个Col的间距,Col,span为占多少空间,总和为24.
+
+
+## 医院排班-医院排班-树形结构
+- 封装请求排班规则的api
+- 接口:/admin/hosp/department/{hoscode}
+- 创建排班科室里面的每一项typeHospitalScheduleItem
+- 创建排班科室列表typeHosScheduleList
+- 打开HospitalList,在点击排班按钮的时候为地址后面添加上hoscode
+- 数据1:科室列表scheduleList
+- 副作用1:请求科室数据,函数getHosSchedule,变量接收请求,并且请求里面要有实参,然后用数据方法,最后调用函数
+- 开始渲染数据列表,为Col科室所在的Col里面添加样式,比如高,overflow,边框
+- 添加树形控件tree,里面要添加几样属性,expandedKeys用来指定默认展开的支点,treeData用来传入数据,fieldNames改变数据里面的名
+- 在routes/index里面的排班路由地址后面添加上hoscode
+
+
+## 医院排班-右侧静态
+- 数据2:页码-当前页
+- 数据3:页码-每页条数
+- 数据4:页码-总条数
+- 在第二个Col里面添加上Tag组件,并且要用div包裹,里面内容可以用随意标签
+- 添加页码组件pagination,属性可以按照之前的,
+- 添加表格组件Table,columns属性
+- 创建表格数据的标题比如序号,职称之类的
+
+
+## 医院排班-排班时间api封装
+- 创建类型typeBookingScheduleItem
+- 接口/admin/hosp/schedule/getScheduleRule/{page}/{limit}/{hoscode}/{depcode}
+- 创建类型typeBookingScheduleList
+- 创建科室排班时间类型(typeScheduleWorkDate )
+- 封装api(reqScheduleWorkDate),记得传入接口的参数,
+
+
+## 医院排班-点击树结构获取时间
+- 数据5:排班时间列表bookingScheduleList
+- 为tree组件添加onSelect属性,可以为其添加触入事件,回调函数treeSelect
+- 方法1:treeSelect,第一个参数是科室depcode,是由key组成的数组,首先要排除错误的,当这个参数小于等于0的时候直接返回
+- 变量接收请求带来的参数,然后数据方法5(变量.bookingScheduelList)
+- 总页数也要传入
+
+
+## 医院排班-数据渲染及页码切换
+- 数据6:保存选中的科室,depCode,初始为空字符,在树结构被触发的时候保存科室的depcode,
+- 为页码组件添加onchange属性,pageChange回调函数
+- 方法2:页面改变事件,传入当前页和每页条数,并且使用他们的方法保存,变量接收请求,与上面的请求一致,最后的方法也一致
+- 改变Tag组件里面的内容,把数据传入进去:科室时间进行遍历,返回Tag组件,里面的内容要根据他们的名字进行传递变化
+
+
+## 医院排班-详情的api
+- api/hospitalList
+- 排班详情列表每一项的类型:/admin/hosp/schedule/findScheduleList/{hoscode}/{depcode}/{workDate}
+- 排班详情列表类型
+- 封装排班管理的api,reqScheduleDetail,记得带入接口的参数,
+- 在医院详情返回值类型中加入一个disabled,要用这禁用科室列表的点击字
+- HospitalSchedule,在请求科室数据的副作用中,把得到的数据遍历,每一个都添加上禁用
+
+
+## 医院排班-完成
+- 数据7:保存详细列表数据scheduleDetail
+- 为表格数据里面的dataIndex添加上名,
+- 为排班时间那里添加上点击事件,showDetail,并且传入参数workDate
+- 方法3:点击排班时间获取列表,高阶函数,遍历接收请求,并且要带入参数,方法变量
+- 将整个右侧栏隐藏,在没有bookingScheduleList(排班时间之前),可以用别的字来提醒也可以直接用空字符
+
+
+
