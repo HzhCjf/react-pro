@@ -284,5 +284,5 @@ export default function HospitalList() {
 
       </Table>
     </div>
-  )
+  );
 }

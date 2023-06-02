@@ -13,6 +13,8 @@ import "./locales/i18n"; // 国际化
 import "antd/dist/reset.css";
 import "./styles/index.css";
 
+console.log("process.env", process.env);
+
 const root = createRoot(document.getElementById("root") as HTMLElement);
 
 root.render(
