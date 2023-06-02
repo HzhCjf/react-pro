@@ -223,3 +223,8 @@ http://139.198.34.216:8202/swagger-ui.html#/
 
 
 
+
+## 医院详情-在详情组件中拿到id
+- 给hospitalDetail路由地址后添加上/:id,可以进行接收id
+- 在HospitalDetail里面用useParams方法获取id
+- 在HospitalList里面使用useNavigate方法使查看按钮可以进行跳转到/syt/hospital/hospitalDetail/${row.id},row.id获取到这个数据体,然后进行跳转获取到这个数据的具体内容
