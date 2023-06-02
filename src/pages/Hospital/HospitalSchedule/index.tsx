@@ -8,27 +8,21 @@ export default function HospitalSchedule() {
 
     // 接收hoscode
     const { hoscode } = useParams()
-
     // 数据1:科室列表
     const [hosSchedule, setHosSchedule] = useState<typeHosScheduleList>([])
-
     // 数据2:页码:当前页
     const [page, setPage] = useState(1)
-
     // 数据3:页码:每页条数
     const [pageSize, setPageSize] = useState(5)
-
     // 数据4:页码:每页总条数
     const [total, setTotal] = useState(0)
-
     // 数据5:科室时间
     const [bookingScheduleList, setBookingScheduleList] = useState<typeBookingScheduleList>([])
-
     // 数据6:保存科室
     const [depCode, setDepCode] = useState('')
-
     // 数据7:排班详情
     const [scheduleDetail, setScheduleDetail] = useState<typeScheduleDetailList>([])
+
 
     // 副作用1:请求科室数据
     useEffect(() => {
@@ -58,7 +52,6 @@ export default function HospitalSchedule() {
         setBookingScheduleList(result.bookingScheduleList)
         setTotal(result.total)
     }
-
     // 方法2:根据页码重新渲染科室时间列表
     const pageChange = async (page: number, pageSize: number) => {
         setPage(page);
@@ -71,7 +64,6 @@ export default function HospitalSchedule() {
         )
         setBookingScheduleList(result.bookingScheduleList)
     }
-
     // 方法3:点击时间展示排班详情
     const ScheduleDetail = (workDate: string) => {
         return async () => {
