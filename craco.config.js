@@ -48,6 +48,15 @@ module.exports = {
           "^/hospital": "",
         },
       },
+      "/address": {
+        // 需要转发的请求前缀
+        target: "http://139.198.34.216:8202", // 目标服务器地址
+        changeOrigin: true, // 允许跨域
+        pathRewrite: {
+          // 路径重写
+          "^/address": "",
+        },
+      },
     },
   },
 };
