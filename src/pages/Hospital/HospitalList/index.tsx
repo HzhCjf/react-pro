@@ -190,7 +190,9 @@ export default function HospitalList() {
             }}>
               查看
             </Button>
-            <Button type="primary" style={{ marginRight: "20px" }}>
+            <Button type="primary" style={{ marginRight: "20px" }} onClick={()=>{
+              navigate(`/syt/hospital/hospitalSchedule/${row.hoscode}`)
+            }}>
               排班
             </Button>
             <Button type="primary" onClick={changeStatus(row.id,row.status)}>{row.status === 1 ? '下线' : '上线'}</Button>
